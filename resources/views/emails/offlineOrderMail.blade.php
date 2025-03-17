@@ -1,17 +1,19 @@
 @component('mail::message')
-#Hello {{auth()->user()->name}}
+# Hello {{ auth()->user()->name }},
 
-We have successfully received your request for following:<br>
-Order Reference No. {{$content['reference_no']}}
+We have successfully received your request for the following items:
+
+## Order Reference No. {{$content['reference_no']}}
+
 @foreach($content['items'] as $item)
-#{{$item['number']}}. {{$item['name']}} {{'$'.$item['price']}}
+- **Item #{{$loop->iteration}}**: {{$item['name']}} - **${{$item['price']}}**
 @endforeach
 
-#Total Amount : ${{$content['total']}}
+## Total Amount: **${{$content['total']}}**
 
-Our representatives will contact you soon regarding order payments.
-Happy Shopping.
+Our representatives will contact you soon regarding your order payment.
 
+Happy Shopping!
 
 Thanks,<br>
 {{ config('app.name') }}
